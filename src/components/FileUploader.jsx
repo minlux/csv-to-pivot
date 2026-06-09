@@ -29,7 +29,7 @@ const FileUploader = ({ setRawData, setHeaders }) => {
 
   return (
     <div className="fileInput">
-      <input type="file" accept='.csv' onChange={handleFileUpload} />
+      <input type="file" accept='.csv,text/csv,text/plain,application/csv,application/vnd.ms-excel' onChange={handleFileUpload} />
     </div>
   );
 };
