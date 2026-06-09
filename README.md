@@ -36,9 +36,11 @@ No global CLI tools beyond Node/npm are required.
 # 1. Install dependencies
 npm install
 
-# 2. Start the dev server with HMR (http://localhost:5173)
+# 2. Start the dev server with HMR
 npm run dev
 ```
+
+Because `base` is set to `/csv-to-pivot/` in `vite.config.js`, the dev server serves the app at `http://localhost:5173/csv-to-pivot/`.
 
 The dev server proxies nothing — the app is fully client-side with no backend.
 
@@ -95,6 +97,29 @@ The manifest and service worker are generated automatically by `vite-plugin-pwa`
 
 ## Deployment
 
-The project deploys as a static site. Upload the contents of `dist/` to any static host (Netlify, GitHub Pages, S3 + CloudFront, nginx, etc.).
+### Base path
 
-Because the app is a single-page application, configure the host to serve `index.html` for all routes.
+The app is built for deployment at `/csv-to-pivot/`. This is controlled by the `base` option in `vite.config.js`:
+
+```js
+base: '/csv-to-pivot/',
+```
+
+Change this value (and the PWA `start_url` directly below it) if the app should be served from a different path or from the domain root (`/`).
+
+### Uploading
+
+Upload the contents of `dist/` to any static host (S3 + CloudFront, nginx, Apache, etc.).
+
+### SPA routing / `.htaccess`
+
+Because the app is a single-page application the web server must serve `index.html` for every request under the base path. For **Apache**, add a `.htaccess` file inside the deployment folder:
+
+```apache
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+```
+
+Once the PWA service worker is active in the browser, it handles navigation from cache, so this rule only matters for the very first load of any deep-linked URL.
