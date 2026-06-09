@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <!--
+    Pivot table grid: 3 cols × 4 rows
+    Cell: 100 × 68 px, gap: 10 px
+    Grid size: 320 × 302 px
+    Origin: (96, 105)
+
+    Cols:  C0=96   C1=206  C2=316
+    Rows:  R0=105  R1=183  R2=261  R3=339
+  -->
+
+  <!-- ── Row 0: column-header row ── -->
+  <!-- corner -->
+  <rect x="96"  y="105" width="100" height="68" rx="10" fill="#93c5fd"/>
+  <!-- col headers -->
+  <rect x="206" y="105" width="100" height="68" rx="10" fill="#3b82f6"/>
+  <rect x="316" y="105" width="100" height="68" rx="10" fill="#3b82f6"/>
+
+  <!-- ── Row 1: data row ── -->
+  <rect x="96"  y="183" width="100" height="68" rx="10" fill="#3b82f6"/>
+  <rect x="206" y="183" width="100" height="68" rx="10" fill="white" fill-opacity="0.13" stroke="white" stroke-opacity="0.18" stroke-width="1.5"/>
+  <rect x="316" y="183" width="100" height="68" rx="10" fill="white" fill-opacity="0.13" stroke="white" stroke-opacity="0.18" stroke-width="1.5"/>
+
+  <!-- ── Row 2: data row ── -->
+  <rect x="96"  y="261" width="100" height="68" rx="10" fill="#3b82f6"/>
+  <rect x="206" y="261" width="100" height="68" rx="10" fill="white" fill-opacity="0.13" stroke="white" stroke-opacity="0.18" stroke-width="1.5"/>
+  <rect x="316" y="261" width="100" height="68" rx="10" fill="white" fill-opacity="0.13" stroke="white" stroke-opacity="0.18" stroke-width="1.5"/>
+
+  <!-- ── Row 3: totals row ── -->
+  <rect x="96"  y="339" width="100" height="68" rx="10" fill="#1d4ed8"/>
+  <rect x="206" y="339" width="100" height="68" rx="10" fill="#1d4ed8"/>
+  <!-- grand total: amber highlight -->
+  <rect x="316" y="339" width="100" height="68" rx="10" fill="#f59e0b"/>
+
+  <!-- Σ in grand-total cell -->
+  <text x="366" y="373"
+        font-family="DejaVu Serif,Georgia,serif"
+        font-size="46" font-weight="bold"
+        fill="white" text-anchor="middle" dominant-baseline="middle">Σ</text>
+
+  <!-- Header cell label hints (small white bars) -->
+  <!-- corner cell: two bars simulating "row × col" -->
+  <rect x="111" y="127" width="36" height="7" rx="3.5" fill="white" fill-opacity="0.7"/>
+  <rect x="111" y="140" width="24" height="7" rx="3.5" fill="white" fill-opacity="0.45"/>
+  <!-- col header 1 -->
+  <rect x="221" y="127" width="44" height="7" rx="3.5" fill="white" fill-opacity="0.7"/>
+  <rect x="221" y="140" width="30" height="7" rx="3.5" fill="white" fill-opacity="0.45"/>
+  <!-- col header 2 -->
+  <rect x="331" y="127" width="44" height="7" rx="3.5" fill="white" fill-opacity="0.7"/>
+  <rect x="331" y="140" width="30" height="7" rx="3.5" fill="white" fill-opacity="0.45"/>
+
+  <!-- row header 1 -->
+  <rect x="111" y="205" width="44" height="7" rx="3.5" fill="white" fill-opacity="0.7"/>
+  <rect x="111" y="218" width="30" height="7" rx="3.5" fill="white" fill-opacity="0.45"/>
+  <!-- row header 2 -->
+  <rect x="111" y="283" width="44" height="7" rx="3.5" fill="white" fill-opacity="0.7"/>
+  <rect x="111" y="296" width="30" height="7" rx="3.5" fill="white" fill-opacity="0.45"/>
+  <!-- total label -->
+  <rect x="111" y="361" width="52" height="7" rx="3.5" fill="white" fill-opacity="0.6"/>
+  <rect x="111" y="374" width="38" height="7" rx="3.5" fill="white" fill-opacity="0.4"/>
+</svg>
