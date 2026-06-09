@@ -48,11 +48,39 @@ export const buildPivotData = (rawData, rowFields, colFields, valFields, aggrega
   const maxStore = {};
 
   const cleanNumericValue = (value) => {
-    if (typeof value === 'string') {
-      const cleanedValue = value.replace(/[^0-9.-]+/g, '');
-      return parseFloat(cleanedValue);
+    if (typeof value === 'number') return value;
+    if (typeof value !== 'string') return NaN;
+
+    // Strip currency symbols and whitespace
+    let s = value.replace(/[$€₹\s]/g, '').trim();
+    if (!s) return NaN;
+
+    const lastComma  = s.lastIndexOf(',');
+    const lastPeriod = s.lastIndexOf('.');
+
+    if (lastComma !== -1 && lastPeriod !== -1) {
+      // Both separators present — the one appearing last is the decimal separator
+      if (lastComma > lastPeriod) {
+        // German/EU: 1.234,56 → remove periods, replace comma with period
+        s = s.replace(/\./g, '').replace(',', '.');
+      } else {
+        // English: 1,234.56 → remove commas
+        s = s.replace(/,/g, '');
+      }
+    } else if (lastComma !== -1) {
+      // Only comma: decimal if ≤2 digits follow (e.g. "1,23"), thousands otherwise
+      s = (s.length - lastComma - 1) <= 2
+        ? s.replace(',', '.')
+        : s.replace(/,/g, '');
+    } else if (lastPeriod !== -1) {
+      // Only period: if last group is exactly 3 digits it is a thousands separator
+      // (covers "1.234" and "1.234.567"); otherwise treat as decimal point
+      if ((s.length - lastPeriod - 1) === 3) {
+        s = s.replace(/\./g, '');
+      }
     }
-    return parseFloat(value);
+
+    return parseFloat(s);
   };
 
   processedData.forEach(row => {

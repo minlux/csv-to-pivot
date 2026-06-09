@@ -9,6 +9,7 @@ function App() {
   const [rawData, setRawData] = useState([]);
   const [headers, setHeaders] = useState([]);
   const [numericHeaders, setNumericHeaders] = useState([]);
+  const [activeTab, setActiveTab] = useState('pivot');
   const [pivotConfig, setPivotConfig] = useState({
     rowFields: [],
     colFields: [],
@@ -49,29 +50,45 @@ function App() {
 
       {rawData.length > 0 && (
         <>
-          <h2 className="section-title">Raw CSV Data Preview</h2>
-          <RawCSVTable data={rawData} />
+          <div className="tabs">
+            <button
+              className={`tab-btn${activeTab === 'pivot' ? ' active' : ''}`}
+              onClick={() => setActiveTab('pivot')}
+            >
+              Pivot Table
+            </button>
+            <button
+              className={`tab-btn${activeTab === 'raw' ? ' active' : ''}`}
+              onClick={() => setActiveTab('raw')}
+            >
+              Raw Data
+            </button>
+          </div>
+
+          {activeTab === 'pivot' && (
+            <div className="pivot-container">
+              <PivotConfigurator
+                data={rawData}
+                headers={headers}
+                numericHeaders={numericHeaders}
+                pivotConfig={pivotConfig}
+                setPivotConfig={setPivotConfig}
+              />
+              <PivotTable
+                rawData={rawData}
+                rowFields={rowFields}
+                colFields={colFields}
+                valFields={valFields}
+                aggregateFuncs={aggregateFuncs}
+              />
+            </div>
+          )}
+
+          {activeTab === 'raw' && (
+            <RawCSVTable data={rawData} />
+          )}
         </>
       )}
-
-      <div className='pivot-container'>
-        <PivotTable
-          rawData={rawData}
-          rowFields={rowFields}
-          colFields={colFields}
-          valFields={valFields}
-          aggregateFuncs={aggregateFuncs}
-        />
-        {headers.length > 0 && (
-          <PivotConfigurator
-           data = {rawData}
-            headers={headers}
-            numericHeaders={numericHeaders}
-            pivotConfig={pivotConfig}
-            setPivotConfig={setPivotConfig}
-          />
-        )}
-      </div>
     </div>
   );
 }

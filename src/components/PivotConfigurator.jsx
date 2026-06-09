@@ -157,11 +157,9 @@ const PivotConfigurator = ({ headers = [], pivotConfig, setPivotConfig, data = [
             );
           })}
         </div>
-        <p className='para'>Drag Fields between areas below:</p>
       </div>
       <div className="dropzones-panel">
         {renderDropZone('Rows', 'rowFields', rowFields)}
-        {renderDropZone('Columns', 'colFields', colFields)}
         {renderDropZone('Values', 'valFields', valFields)}
       </div>
     </div>
