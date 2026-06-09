@@ -113,7 +113,6 @@ const PivotConfigurator = ({ headers = [], pivotConfig, setPivotConfig, data = [
             onDragStart={(e) => onDragStart(e, field)}
           >
             {fieldKey === 'valFields' && isNumericField(field) ? `∑ ${field}` : field}
-            <button className="remove-btn" onClick={() => removeField(fieldKey, field)}>✖</button>
             {fieldKey === 'valFields' && isNumericField(field) && (
               <select
                 className="agg-select"
@@ -125,6 +124,7 @@ const PivotConfigurator = ({ headers = [], pivotConfig, setPivotConfig, data = [
                 ))}
               </select>
             )}
+            <button className="remove-btn" onClick={() => removeField(fieldKey, field)}>✖</button>
           </div>
         ))}
       </div>
