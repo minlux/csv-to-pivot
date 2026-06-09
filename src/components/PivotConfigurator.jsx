@@ -20,7 +20,8 @@ const PivotConfigurator = ({ headers = [], pivotConfig, setPivotConfig, data = [
     const lcField = field.toLowerCase();
     if (['date', 'year', 'month', 'day'].some(p => lcField.includes(p))) return false;
     if (['price', 'amount', 'total', 'sum', 'value', 'cost', 'quantity', 'percent', 'rate', 'ratio', 'salary', 'revenue'].some(p => lcField.includes(p))) return true;
-    return (fieldValueMap[field] || []).some(isNumericValue);
+    const nonEmpty = (fieldValueMap[field] || []).filter(v => v !== '' && v != null);
+    return nonEmpty.length > 0 && nonEmpty.every(isNumericValue);
   };
 
   const allFields = useMemo(() => {
