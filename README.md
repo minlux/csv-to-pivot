@@ -4,6 +4,8 @@ A browser-based tool that lets users upload a CSV file, preview the raw data, an
 
 Forked from [Sk-Siva/CSV-to-Pivot](https://github.com/Sk-Siva/CSV-to-Pivot).
 
+**End-user guides:** [English](USER_GUIDE.md) · [Deutsch](USER_GUIDE_DE.md)
+
 ---
 
 ## Framework & Libraries
